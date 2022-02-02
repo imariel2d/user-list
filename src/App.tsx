@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { useUsers } from './hooks/users';
+
+import { UserCard } from './components/user-card';
+import { SearchBar } from './components/search-bar';
+
+import './style/app.css';
+
+export const App = () => {
+  const { data, isError, isLoading } = useUsers();
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>loading....</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div>
+        <p>Error: data can not be found.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <SearchBar />
+      <div className="users-wrapper">
+        {
+          data != null && data.length > 0 ? (
+            data.map((user) => (
+              <div key={user.id}>
+                <UserCard name={user.name} email={user.email} />
+              </div>
+            ))
+          ) : <p>There is no data available!</p>
+        }
+      </div>
     </div>
   );
-}
-
-export default App;
+};

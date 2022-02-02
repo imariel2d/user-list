@@ -1,0 +1,19 @@
+.user-wrapper {
+  padding: 16px;
+  border: 1px solid #f3effd;
+  min-height: 100px;
+}
+
+.user-name {
+  font-size: 1rem;
+  color: #040320;
+  font-weight: bolder;
+  margin: 0;
+}
+
+.user-email {
+  font-size: 0.8rem;
+  color: #4834d4;
+  font-weight: bold;
+  margin: 0;
+}
