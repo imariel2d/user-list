@@ -17,3 +17,7 @@
   font-weight: bold;
   margin: 0;
 }
+
+.not-enabled {
+  background-color: #040320;
+}

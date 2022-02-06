@@ -4,7 +4,7 @@ import { User } from '../types/user';
 
 export const useUsers = () => {
   const responses = useQuery<User[]>('users', () =>
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('/users')
       .then((res) => res.json()),
   );
 

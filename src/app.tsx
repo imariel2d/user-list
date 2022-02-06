@@ -34,7 +34,11 @@ export const App = () => {
           data != null && data.length > 0 ? (
             data.map((user) => (
               <div key={user.id}>
-                <UserCard name={user.name} email={user.email} />
+                <UserCard
+                  name={user.name}
+                  email={user.email}
+                  enabled={user.enabled}
+                />
               </div>
             ))
           ) : <p>There is no data available!</p>

@@ -18,6 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "dev": "",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,5 +41,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "msw": "^0.36.8"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
