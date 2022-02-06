@@ -4,6 +4,7 @@ import { useUsers } from './hooks/users';
 
 import { UserCard } from './components/user-card';
 import { SearchBar } from './components/search-bar';
+import { AddUser } from './components/add-user';
 
 import './style/app.css';
 
@@ -28,7 +29,8 @@ export const App = () => {
 
   return (
     <div className="app">
-      <SearchBar />
+      {/*<SearchBar />*/}
+      <AddUser />
       <div className="users-wrapper">
         {
           data != null && data.length > 0 ? (
