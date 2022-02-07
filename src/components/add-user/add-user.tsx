@@ -1,17 +1,47 @@
 import React, { useState } from 'react';
-import { useMutation } from 'react-query';
-import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+
+import { addUser } from '../../service/user';
+
+import { User } from '../../types/user';
+import { QuerieKeys } from '../../types/querie-keys';
 
 export const AddUser = () => {
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation<User, void, User>(QuerieKeys.Users, addUser, {
+    onMutate: async (newUser) => {
+      await queryClient.cancelQueries(QuerieKeys.Users);
+
+      const previousUsers = queryClient.getQueriesData(QuerieKeys.Users);
+
+      queryClient.setQueriesData<User[]>(QuerieKeys.Users, (old) => {
+        if (old){
+          return [...old, newUser];
+        }
+
+        return [];
+      });
+
+      return previousUsers;
+    },
+    onError: (error, newUser, context) => {
+      queryClient.setQueriesData(QuerieKeys.Users, context);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(QuerieKeys.Users);
+    },
+  });
 
   const onClick = () => {
-    axios.post('/user', {
-      id: 0,
+    mutate({
+      id: '',
       name,
       email,
-      enabled: true
+      enabled: true,
     });
   };
 

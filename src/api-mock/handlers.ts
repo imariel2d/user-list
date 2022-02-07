@@ -23,7 +23,7 @@ export const handlers = [
 
     return res(
       ctx.status(201, 'Mocked status'),
-      ctx.json(users),
+      ctx.json(user),
     );
   }),
 ];
